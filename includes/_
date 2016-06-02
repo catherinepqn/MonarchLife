@@ -1,0 +1,95 @@
+<?php
+include_once 'psl-config.php';
+include_once 'functions.php';
+
+$pdo = new PDO(
+    'mysql:host=localhost;dbname=monarchlife',
+    'root',
+    'lifeofmonarch');
+
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+if(! isset($_POST['search']) || !isset($_POST['field'])) {
+	echo 'Sorry, no results found.';
+}
+echo "search results";
+
+switch($_POST['field']) {
+	case 'All':
+		$_POST['search'] = '%'.$_POST['search'].'%';
+                $stmt = $pdo->prepare('SELECT * FROM user WHERE fname LIKE :search or lname LIKE :search or email LIKE :search');
+	
+		break;
+
+	case 'Users':
+		$_POST['search'] = '%'.$_POST['search'].'%';
+		$stmt = $pdo->prepare('SELECT * FROM user WHERE fname LIKE :search or lname LIKE :search or email LIKE :search');
+
+		break;
+
+	case 'Events':
+		 $_POST['search'] = '%'.$_POST['search'].'%';
+                $stmt = $pdo->prepare('SELECT * FROM event WHERE event_name LIKE :search or event LIKE :search or event_type LIKE :search');
+
+		break;
+
+	case 'Resources':
+		$_POST['search'] = '%'.$_POST['search'].'%';
+                $stmt = $pdo->prepare('SELECT * FROM resource WHERE resource_name LIKE :search');
+
+		break;
+
+
+	default:
+		echo "wth";
+		break;
+}
+
+$stmt->execute($_POST);		
+
+$results = mysqli_query($pdo, $stmt);
+if (count($results) < 1) {
+
+}
+/*	echo "<table>";
+	echo "<tr>";
+	echo "<th> Username </th>";*/
+
+	switch($_POST['field']) {
+        case 'All':
+		while($row = mysqli_fetch_array($results)){
+				echo "Username: " .$row['username']. ".";
+        	}
+                break;
+
+        case 'Users':
+		while($results = $stmt->fetchAll()){
+		echo "User found: " .$results.fname. " lastname: " .$results.lname." " ;
+
+        }
+
+                break;
+
+        case 'Events':
+		while($results = $stmt->fetchAll()){
+		echo "Events found: " .$results.event_name. " Event type: " .$results.event_type." " ;
+
+        }
+
+                break;
+
+        case 'Resources':
+		while($results = $stmt->fetchAll()){
+		echo "Resource found: " .$results.resource_name. "  ";
+
+        }
+
+                break;
+
+
+        default:
+                echo "wth";
+                break;
+}
+
+?>

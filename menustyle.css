@@ -1,0 +1,66 @@
+body { font-family: Verdana,Arial,sans-serif;
+	   margin: 0;
+	 }
+	 
+#container {
+		   width: 100%;
+		   min-width: 800px; /*override function*/	 
+		   }
+	 
+#content {
+  margin-left:  15%;
+  padding-top: 0px;
+}
+
+#leftbar {
+  float: left;
+  background: #e7e7e7;
+  text-align: center;
+  color: black;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 17em;
+}
+#leftbar li {
+  font: 100% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#leftbar a {
+  background: #e7e7e7;
+  border-bottom: 1px solid #A5A5BE;
+  color: black;
+  display: block;
+  margin: 0;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-weight: normal;
+}
+#leftbar a:hover {
+  background: #A5A5BE;
+  color: white;
+  padding-bottom: 8px;
+}
+
+#profile.active{
+background: #A5A5BE;
+color: white;}
+
+#events.active{
+background: #A5A5BE;
+color: white;}
+
+#calendar.active{
+background: #A5A5BE;
+color: white;}
+
+#man_events.active{
+background: #A5A5BE;
+color: white;}
+
+#con_providers.active{
+background: #A5A5BE;
+color: white;}
+

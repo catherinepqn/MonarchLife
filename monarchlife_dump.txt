@@ -1,0 +1,188 @@
+-- MySQL dump 10.15  Distrib 10.0.22-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: monarchlife
+-- ------------------------------------------------------
+-- Server version	10.0.22-MariaDB-1~trusty-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `colleges`
+--
+
+DROP TABLE IF EXISTS `colleges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `colleges` (
+  `college_name` text,
+  `department` text,
+  `website` text,
+  `num_events` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `colleges`
+--
+
+LOCK TABLES `colleges` WRITE;
+/*!40000 ALTER TABLE `colleges` DISABLE KEYS */;
+/*!40000 ALTER TABLE `colleges` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `event`
+--
+
+DROP TABLE IF EXISTS `event`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `event` (
+  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `manager_id` int(11) NOT NULL DEFAULT '0',
+  `event` date DEFAULT NULL,
+  `event_time` time DEFAULT NULL,
+  `event_type` varchar(50) DEFAULT NULL,
+  `location` varchar(50) NOT NULL,
+  `event_attendees` int(11) DEFAULT NULL,
+  `event_expiration` date NOT NULL,
+  `num_attendees` int(11) DEFAULT '0',
+  `points_worth` int(4) DEFAULT '0',
+  `event_name` mediumtext NOT NULL,
+  `public` tinyint(1) NOT NULL DEFAULT '1',
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  `metadata_tags` mediumtext NOT NULL,
+  PRIMARY KEY (`event_id`),
+  UNIQUE KEY `event_id` (`event_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `event`
+--
+
+LOCK TABLES `event` WRITE;
+/*!40000 ALTER TABLE `event` DISABLE KEYS */;
+INSERT INTO `event` VALUES (5,0,'2015-12-18','00:12:00','Meeting','Here',NULL,'0000-00-00',0,0,'Meeting',1,0,''),(6,0,'2015-12-31','11:00:00','Here','Here',NULL,'0000-00-00',0,0,'My Party',1,0,''),(7,0,'2015-12-31','00:13:00','Here','Here',NULL,'0000-00-00',0,0,'My Party',1,0,''),(8,37,'2015-12-23','838:59:59','Game','Here',NULL,'0000-00-00',0,0,'My Party',1,0,''),(9,37,'2015-12-31','00:00:00','Sport','Stadium',NULL,'0000-00-00',0,0,'Football',1,1,''),(10,37,'2015-12-31','00:59:00','Sport','Stadium',NULL,'0000-00-00',0,0,'Football',1,0,''),(12,37,'2015-12-02','14:30:00','Sports','Stadium',NULL,'0000-00-00',0,0,'Basketball',1,1,'');
+/*!40000 ALTER TABLE `event` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `login_attempts`
+--
+
+DROP TABLE IF EXISTS `login_attempts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `login_attempts` (
+  `uid` int(11) NOT NULL,
+  `time` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `login_attempts`
+--
+
+LOCK TABLES `login_attempts` WRITE;
+/*!40000 ALTER TABLE `login_attempts` DISABLE KEYS */;
+INSERT INTO `login_attempts` VALUES (1,'1446512988'),(1,'1446513034'),(1,'1446513055'),(1,'1448824941'),(3,'1448925429'),(3,'1448925520'),(21,'1448932158'),(3,'1448970366'),(3,'1448976590'),(3,'1448991607'),(3,'1449256203'),(26,'1449257596'),(26,'1449257613'),(40,'1449261121'),(40,'1449261134'),(30,'1449285776'),(30,'1449286063'),(30,'1449286072'),(30,'1449286080'),(48,'1449348624'),(48,'1449348637'),(48,'1449348650'),(30,'1449348663'),(48,'1449374350'),(37,'1449376368'),(1111,'1449392484'),(1111,'1449392493'),(1111,'1449392521'),(1111,'1449392538'),(1111,'1449392611'),(1111,'1449392737'),(1111,'1449446411'),(49,'1449446507'),(49,'1449446588'),(49,'1449446632'),(1111,'1449446760'),(1111,'1449446771'),(1135,'1449492565'),(3,'1449494213'),(1136,'1449534991'),(1136,'1449534999'),(40,'1449596688');
+/*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resource`
+--
+
+DROP TABLE IF EXISTS `resource`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resource` (
+  `resource_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_name` varchar(50) NOT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `phone_number` varchar(30) DEFAULT NULL,
+  `link` varchar(80) DEFAULT NULL,
+  `metadata_tags` mediumtext NOT NULL,
+  PRIMARY KEY (`resource_id`),
+  UNIQUE KEY `resource_name` (`resource_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resource`
+--
+
+LOCK TABLES `resource` WRITE;
+/*!40000 ALTER TABLE `resource` DISABLE KEYS */;
+INSERT INTO `resource` VALUES (1,'Dominion Bookstore','5115 Hampton Blvd, Norfolk, VA 23529','(757)683-4843','',''),(2,'Alfriend Chemistry Building','4541 Hampton Boulevard Norfolk, VA ',NULL,'https://www.odu.edu/chemistry',''),(3,'Barry Arts Building','4600 Monarch Way, Norfolk, VA',NULL,'https://www.odu.edu/life/buildings/buildings/bab',''),(4,'Batten Arts & Letters Building','Batten Arts and Letters Bldg, 4401 Hampton Blvd, N',NULL,'https://www.odu.edu/life/buildings/buildings/bal',''),(5,'Center for Accelerator Sciences','306 OceanographyandPhysics Bldg Norfolk,  VA',NULL,'https://odu.edu/sci/research/cas',''),(6,'Center for Coastal Phys Oceanography','4111 Monarch Way, Norfolk, VA',NULL,'http://www.ccpo.odu.edu/',''),(7,'Children\'s Learning Research Center',NULL,NULL,'http://www.odu.edu/partnerships/community/programs/child-care',''),(8,'Constant Hall','5115 Hampton Blvd, Norfolk, VA ',NULL,'https://www.odu.edu/life/buildings/buildings/const',''),(9,'Child Study Center',NULL,NULL,'https://www.odu.edu/life/buildings/buildings/csc',''),(10,'Diehn Fine & Performing Arts Center','Diehn Center for the Performing Arts Norfolk, VA',NULL,'https://www.odu.edu/library/diehn',''),(11,'Dragas Hall','Dragas Hall, 4807 Hampton Blvd, Norfolk, VA',NULL,'https://www.odu.edu/life/buildings/buildings/draga',''),(12,'Engineering & Computational Sciences Buildings',NULL,NULL,'https://www.odu.edu/life/buildings/buildings/ecs',''),(13,'Education Building','111 Facilities Management 4401 Powhatan Ave. Ste. ',NULL,'https://www.odu.edu/life/buildings/buildings/projects/education',''),(14,'Engineering Systems Building',NULL,NULL,'https://www.odu.edu/life/buildings/buildings/projects/education',''),(15,'Stadium/Foreman Field',NULL,NULL,'http://www.odusports.com/',''),(16,'Goode Theatre','3000 Batten Arts & Letters Norfolk,  VA',NULL,'http://www.odu.edu/commtheatre/theatre/season.html',''),(17,'Albert Gornto TELETECHNET Building','1236 W 43rd St, Norfolk, VA',NULL,'https://www.odu.edu/life/buildings/buildings/gornt',''),(18,'Health Sciences Building',NULL,NULL,'https://www.odu.edu/life/buildings/buildings/hsb',''),(19,'ODU Inn','4111 Hampton Blvd. Norfolk, VA',NULL,'https://www.odu.edu/life/housing/on-campus-housing/residences/theinn',''),(20,'Jarrett Athletic Administration Building','Jim Jarrett Athletic Administration Building Norfo',NULL,'https://www.odu.edu/athletics/directory',''),(21,'Jacobson Athletic Academic Center','https://www.odu.edu/about/president/jacobson-house','757-683-3159','https://www.odu.edu/about/president/jacobson-house',''),(22,'Joint Training & Simulation Center','1030 University Blvd. Suffolk, VA',NULL,'https://www.odu.edu/vmasc/welcome',''),(23,'Kaufman Engineering Hall','135 Kaufman Hall, Norfolk, VA',NULL,'http://sdi.odu.edu/cee/kdh_whe.html',''),(24,'Koch Hall','2000 Koch Hall Norfolk,  VA',NULL,'https://www.odu.edu/life/buildings/buildings/koch',''),(25,'University Libraries','4427 Hampton Blvd. Norfolk, VA',NULL,'http://www.odu.edu/library',''),(26,'Mills Godwin Life Science Building',NULL,NULL,'https://www.odu.edu/life/buildings/buildings/mgb',''),(62,'New Arts Building','111 Facilities Management 4401 Powhatan Ave. Ste. ',NULL,'https://www.odu.edu/life/buildings/buildings/projects/art-studio',''),(63,'Oceanography/Physical Science Building',NULL,NULL,'https://www.odu.edu/life/buildings/buildings/ocnps',''),(64,'Rogers Complex','1065 W. 50th Street, Norfolk, VA',NULL,'https://www.odu.edu/life/housing/on-campus-housing/residences/rogers',''),(65,'Alfred B. Rollins Hall','202 Rollins Hall Norfolk, VA',NULL,'https://www.odu.edu/admission/costs-tuition/tuition/account-representatives',''),(66,'Student Recreation Center','4700 Powhatan Ave, Norfolk, VA',NULL,'http://www.odu.edu/recsports',''),(67,'Student Success Center','Student Success Center 4427 Hampton Blvd. Norfolk,',NULL,'http://ww2.odu.edu/ao/successcenter/LocationHours.shtml',''),(68,'Stables Theatre',NULL,NULL,'https://www.odu.edu/life/buildings/buildings/stabl',''),(74,'Tri-Cities Higher Education Center','1070 University Blvd, Portsmouth, VA',NULL,'http://www.odu.edu//tricities',''),(75,'Ted Constant Convocation Center','4320 Hampton Blvd, Norfolk, VA',NULL,'http://www.constantcenter.com/',''),(76,'Visual Arts Building',NULL,NULL,'https://www.odu.edu/life/buildings/buildings/vab',''),(77,'Webb University Center','1300 W 49th St, Norfolk, VA',NULL,'http://www.odu.edu/content/odu/life/gettinginvolved/webb.html',''),(78,'Whitehurst Residence Hall','1715 W 48th St, Norfolk, VA',NULL,'https://www.odu.edu/life/housing/on-campus-housing/residences/whitehurst',''),(79,'Writing Center','9000 Batten Arts & Letters Norfolk,  VA',NULL,'https://www.odu.edu/al/centers/writing-center','');
+/*!40000 ALTER TABLE `resource` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL,
+  `fname` varchar(30) NOT NULL,
+  `lname` varchar(30) NOT NULL,
+  `type` enum('guest','student','content_manager','moderator','administrator') NOT NULL DEFAULT 'guest',
+  `permission` enum('0','1','2','3') DEFAULT '0',
+  `rank` enum('Serf','Squire','Knight','Dame','Baron','Baroness','Viscount','Viscountess','Count','Countess','Marquis','Duke','Duchess','Archduke','Archduchess','Grand Duke','Duchess','Monarch','Grand Monarch') DEFAULT 'Serf',
+  `monarchpoints` int(10) DEFAULT '10',
+  `pridepoints` int(10) DEFAULT '10',
+  `username` varchar(32) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `mname` varchar(30) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `phone_num` char(10) DEFAULT NULL,
+  `academic_level` enum('freshman','sophmore','junior','senior') DEFAULT NULL,
+  `college` varchar(30) DEFAULT NULL,
+  `academic_major_1` varchar(30) DEFAULT NULL,
+  `academic_major_2` varchar(30) DEFAULT NULL,
+  `academic_minor_2` varchar(30) DEFAULT NULL,
+  `academic_minor_1` varchar(30) DEFAULT NULL,
+  `academic_concentration_1` varchar(30) DEFAULT NULL,
+  `academic_concentration_2` varchar(30) DEFAULT NULL,
+  `metadata_tags` mediumtext,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `user_login_id` (`username`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1138 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'erobe021@odu.edu','Emmett','Roberson','student','0','Squire',1000,550,'emmett','ed9d3d832af899035363a69fd53cd3be8f71501c','Leon',NULL,NULL,'senior',NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(2,'S13nna@yahoo.com','Sienna','Roberson','guest','0','Serf',10,10,'sienna','b1c1d8736f20db3fb6c1c66bb1455ed43909f0d8','Marie','1996-01-20',NULL,'','Tidewater Community College','Liberal Arts',NULL,NULL,NULL,NULL,NULL,''),(3,'cnguy007@odu.edu','Catherine','Nguyen','moderator','2','Dame',3000,2000,'cnguy007','88bc45c20e69f93f2bd78924b030fc7bff8ebadc','Phuong Quynh','1993-03-26',NULL,'senior','ODU','Computer Science',NULL,NULL,'IT',NULL,NULL,NULL),(23,'tylerdurden@odu.edu','Tyler','Durden','student','0','Serf',10,10,'tylerdurden','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',NULL,NULL,NULL,'freshman',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,'admin1@cs.odu.edu','Martin','King','administrator','3','',10,0,'MKing','0b013966af5891373553a27eb6fecd02297e7b90','Luther',NULL,'(757)-222-',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(26,'admin2@cs.odu.edu','Barrack','Obama','administrator','3','Serf',10,0,'BObama','e81c0783824984a6e223029756a563eba8a50ef3',NULL,NULL,'7577778888',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(30,'rshah@cs.odu.edu','Rohan','Shah','student','0','Serf',10,0,'rshah','2bfad1be8e1e9d0d30b5d439399328e208198824',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(32,'pbeldridge@gmail.com','Phil','Eldridge','student','0','Serf',10,0,'pbeldridge','20de5e0ec7b886e7bbfffbeb7b60fb2f20755160',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(36,'rshah1@cs.odu.edu','abc','xyz','student','0','Serf',10,0,'rohaan','0e3bbd26f46012ccec4776d171f314a00c022d98',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(37,'mwrig043@odu.edu','Mike','Wright','content_manager','1','Serf',10,0,'mikestester','b444ac06613fc8d63795be9ad0beaf55011936ac',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(39,'mikeymike930@gmail.com','MICHAEL','WRIGHT','student','0','Serf',10,0,'mikestester2','109f4b3c50d7b0df729d299bc6f8e9ef9066971f',NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL),(40,'kshen001@odu.edu','Kreshnik','Shena','moderator','2','Grand Monarch',10000,10,'kshena','b44a9e75447c1320acfb76d3bbdd8adfa1674821',NULL,NULL,NULL,'senior',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(45,'rshah112005@odu.edu','test','tester','student','0','Serf',10,10,'rohanss','4d7547a1d2787c72f0e985d8b5194295e4aa6141',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(48,'tester001@odu.edu','tester1','tester1','student','0','Serf',10,10,'tester001','9babbd83e7fc9ef264f6c9d2fe3bf758859bf9d6',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(49,'tester002@odu.edu','test','tester','student','0','Serf',10,10,'tester002','4d7547a1d2787c72f0e985d8b5194295e4aa6141',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(50,'cnguyen@cs.odu.edu','Cat','Nguyen','content_manager','0','Serf',10,0,'cnguyen','88bc45c20e69f93f2bd78924b030fc7bff8ebadc',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1111,'testeradmin1@odu.edu','testeradmin','testadmin','administrator','3','Serf',10,0,'testeradm','*AC987D23B44E15FEEEE829A897A4A7F4094B56B',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1113,'mod@odu.edu','MonarchLife','Moderator','moderator','2','',0,0,'mod','7dd30f0a95d522bfc058be4e75847f8b6df9f76b','none',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1117,'nick@email.com','Nick','Shena','guest','0','Serf',0,0,'niku','274b44a6c0e088e21fb6b82fb103b3420a0f5f48',NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL),(1134,'kot@email.com','kot1','kot2','student','0','Serf',10,10,'kot','b44a9e75447c1320acfb76d3bbdd8adfa1674821',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1136,'adm@cs.odu.edu','odu','administrator','administrator','3','Serf',10,10,'admin','d033e22ae348aeb5660fc2140aec35850c4da997',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1137,'mgr@email.com','content','manager','content_manager','0','Serf',10,10,'mgr','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-12-08 13:01:42
